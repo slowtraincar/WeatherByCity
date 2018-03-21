@@ -8,8 +8,7 @@
         
             
             $urlContents = 
-       file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".$_GET['city']."&appid=cd7abd63e8c28a10b1c49ac67f04419d");
-        
+       file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".$_GET['city']."&appid= ENTER KEY
         $weatherArray= json_decode($urlContents, true);
         
         if($weatherArray['cod'] == 200){
