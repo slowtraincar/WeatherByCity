@@ -4,13 +4,15 @@
     $weather = "";
     $error = "";
 
+//Grab user input city
     if ($_GET['city']){
         
             
             $urlContents = 
        file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=".$_GET['city']."&appid= ENTER KEY
         $weatherArray= json_decode($urlContents, true);
-        
+
+//If successful
         if($weatherArray['cod'] == 200){
         
         $weather = "The weather in ".$_GET['city']." is currently ".$weatherArray['weather'][0]['main']." or, ya know,  ".$weatherArray['weather'][0]['description']."... Dude, if this is where you are, get inside!";
@@ -19,9 +21,10 @@
         $tempInFar = round($tempInCelcius * 1.8 + 32);
         $wind = round($weatherArray['wind']['speed'] * 2.2369);
         
-        $weather .= " The temperature is ".$tempInCelcius."&deg; C! That's like ".$tempInFar."&deg; F in american! Not only that, the wind speed is ".$wind."MPH!";
+        $weather .= " The temperature is ".$tempInCelcius."&deg; C! That's like ".$tempInFar."&deg; F  Not only that, the wind speed is ".$wind."MPH!";
         
     } else {
+//error    
          $error = "Uhh, where did you look for? Maybe try the next town over..";
     }
     }
@@ -74,11 +77,12 @@
       
   </head>
   <body>
-      
+ 
+<!--Title--> 
     <div class="container">
         <h1 class="title">What's the weather?</h1>
         
-        
+<!--City input Form-->        
         <form>
           <div class="form-group">
             <label for="city" class="title">Enter the name of a city</label>
@@ -90,7 +94,8 @@
           }  
           ?> ">    
           </div>
-            
+<!--Response--> 
+                         
           <div id="weather"><?php 
                
               if ($weather){
@@ -101,7 +106,9 @@
                   echo '<div class="alert alert-danger" role="alert">'.$error.'</div>';
               }
               ?>
-              </div>    
+          </div>
+
+<!--Submit Button-->
           <button type="submit" class="btn btn-info btn-lg">Submit</button>
         </form>
         
